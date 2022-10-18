@@ -25,6 +25,10 @@ class Circles {
   let circles = [];
   
   let numCircles = 0;
+
+  let start = 0;
+  let gobackbg = false;
+  let john = 0;
   
   let rb;
   let gb;
@@ -50,12 +54,8 @@ class Circles {
   
 	console.log("click wherever");
   
-	rb = random(255);
-	gb = random(255);
-	bb = random(255);
-	rbb = random(255);
-	gbb = random(255);
-	bbb = random(255);
+	rb = color(random(255), random(255), random(255));
+	rbb = color(random(255), random(255), random(255));
   
 	circles.push(new Circles(random(windowWidth), random(windowHeight), random(20), random(2), random(2)));
   }
@@ -63,15 +63,33 @@ class Circles {
   function draw() {
 	// put drawing code here
   
-	background(lerp(rb, rbb, frameCount/150), lerp(gb, gbb, frameCount/150), lerp(bb,bbb, frameCount/150));
+	if(gobackbg == true){
+		background(lerpColor(rbb, rb, john/150));
+	} else {
+		background(lerpColor(rb, rbb, john/150));
+	}
+
+	john ++;
   
-	for(let i = 0; i < numCircles + 1; i++){
+	for(let i = start; i < numCircles + 1; i++){
 	  circles[i].move();
+	  if(circles[i].r > windowWidth + circles[i].x && circles[i].r > windowHeight + circles[i].y){
+		start += 1;
+	  }
+	  if(numCircles - start > 50){
+		start += 1;
+	  }
 	}
   
 	if(frameCount % 150 == 0){
 	  numCircles += 1;
 	  circles.push(new Circles(mouseX, mouseY, random(20), random(2), random(2)));
+	  john = 0;
+	  if(gobackbg == true){
+		gobackbg = false;
+	  } else {
+		gobackbg = true;
+	  }
 	}
   
   }
