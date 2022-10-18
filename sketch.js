@@ -72,7 +72,9 @@ class Circles {
 	john ++;
   
 	for(let i = start; i < numCircles + 1; i++){
-	  circles[i].move();
+	if(circles[i].r < windowWidth + circles[i].x || circles[i].r < windowHeight + circles[i].y){
+		circles[i].move();
+		}
 	  if(numCircles - start > 50){
 		start += 1;
 	  }
