@@ -73,13 +73,14 @@ class Circles {
   
 	for(let i = start; i < numCircles + 1; i++){
 	  circles[i].move();
-	  if(circles[i].r > windowWidth + circles[i].x && circles[i].r > windowHeight + circles[i].y){
-		start += 1;
-	  }
 	  if(numCircles - start > 50){
 		start += 1;
 	  }
 	}
+
+	if(circles[start].r > windowWidth + circles[start].x && circles[start].r > windowHeight + circles[start].y){
+		start += 1;
+	  }
   
 	if(frameCount % 150 == 0){
 	  numCircles += 1;
