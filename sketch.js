@@ -37,9 +37,14 @@ class Circles {
   let gbb;
   let bbb;
   let cycle = true;
+
+  let myImage;
   
   function preload() {
 	// put preload code here
+
+	myImage = loadImage("assets/Al_Jolson.png");
+
   }
   
   function setup() {
@@ -94,6 +99,8 @@ class Circles {
 		gobackbg = true;
 	  }
 	}
+
+	image(myImage, 0, 0, myImage.width, myImage.height);
   
   }
   
